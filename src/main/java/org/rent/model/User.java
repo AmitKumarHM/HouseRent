@@ -1,0 +1,149 @@
+package org.rent.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.rent.model.enums.Gender;
+
+@XmlRootElement	
+@Entity
+@Table(name = "User")
+@NamedQueries({@NamedQuery(name=User.GET_USERS_LIST,query="select u from User u"),
+	           @NamedQuery(name=User.GET_USER_BY_ID,query="select u from User u where u.userId=:userId")})
+public class User implements Serializable{
+	private static final long serialVersionUID = -1661527419693036326L;
+	public static final String GET_USERS_LIST = "User.getUserList";
+	public static final String GET_USER_BY_ID = "User.getUserById";
+		
+	@Column(name = "password")
+	private String password;
+	
+	@Column(name = "email_id")
+	private String emailId;
+	
+	@Column(name = "first_name")
+	private String firstName;
+	
+
+	@Column(name = "last_name")
+	private String lastName;
+	
+	@Column(name = "mobile_number")
+	private Integer mobileNumber; 
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "gender")
+	private Gender gender;
+	
+	@Column(name = "created_date")
+	private Date createdDate; 
+	
+	@Column(name = "updated_date")
+	private Date updatedDate; 
+	
+	@Column(name = "active")
+	private Boolean active;
+	
+	@Column(name = "subscribe")
+	private Boolean subscribe;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer userId;
+	
+
+	/** The role. */
+	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
+	@JoinColumn(name="role_id")
+	private Role role;
+
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public Integer getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(Integer mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Date getUpdateDate() {
+		return updatedDate;
+	}
+	public void setUpdateDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public Boolean getSubscribe() {
+		return subscribe;
+	}
+	public void setSubscribe(Boolean subscribe) {
+		this.subscribe = subscribe;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+}
