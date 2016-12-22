@@ -16,8 +16,8 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
 	
 	@Override
-	public Boolean validToken(AccessToken accessToken) {
-		return (accessTokenDao.validToken(accessToken) != null)?true:false;
+	public AccessToken validToken(AccessToken accessToken) {
+		return accessTokenDao.validToken(accessToken);
 	}
 
 	@Override

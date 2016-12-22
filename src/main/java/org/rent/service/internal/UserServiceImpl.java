@@ -21,5 +21,9 @@ public class UserServiceImpl implements UserService {
 	public User getUser(int id) {		
 		return userDao.findUser(id);
 	}
+	@Override
+	public User getByEmailAndPwd(User user) {
+		return userDao.findByEmailAndPwd(user);
+	}
 
 }

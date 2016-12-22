@@ -38,4 +38,12 @@ public class UserDaoImpl implements UserDao {
 		List<User> objUserList = (List<User>)userList.getResultList();
 		return objUserList.get(0);
 	}
+
+	@Override
+	public User findByEmailAndPwd(User user) {
+		Query query = entityManager.createNamedQuery(User.GET_BY_EMAIL_AND_PWD);
+		query.setParameter("emailId", user.getEmailId());
+		query.setParameter("password", user.getPassword());
+		return (User)query.getSingleResult();
+	}
 }

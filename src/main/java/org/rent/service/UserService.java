@@ -8,4 +8,5 @@ public interface UserService {
 
 List<User> getUserList(); 
 User getUser(int id);
+User getByEmailAndPwd(User user);
 }

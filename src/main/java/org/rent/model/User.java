@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.rent.model.enums.Gender;
 
@@ -25,13 +26,16 @@ import org.rent.model.enums.Gender;
 @Entity
 @Table(name = "User")
 @NamedQueries({@NamedQuery(name=User.GET_USERS_LIST,query="select u from User u"),
-	           @NamedQuery(name=User.GET_USER_BY_ID,query="select u from User u where u.userId=:userId")})
+	           @NamedQuery(name=User.GET_USER_BY_ID,query="select u from User u where u.userId=:userId"),
+	           @NamedQuery(name=User.GET_BY_EMAIL_AND_PWD,query="select u from User u where u.emailId=:emailId and u.password=:password")})
 public class User implements Serializable{
 	private static final long serialVersionUID = -1661527419693036326L;
 	
 	public static final String GET_USERS_LIST = "User.getUserList";
 	public static final String GET_USER_BY_ID = "User.getUserById";
+	public static final String GET_BY_EMAIL_AND_PWD = "User.getByEmailAndPwd";
 		
+	@XmlTransient
 	@Column(name = "password")
 	private String password;
 	
@@ -53,16 +57,16 @@ public class User implements Serializable{
 	private Gender gender;
 	
 	@Column(name = "created_date")
-	private Date createdDate; 
+	private Date createdDate=new Date(); 
 	
 	@Column(name = "updated_date")
-	private Date updatedDate; 
+	private Date updatedDate=new Date(); 
 	
 	@Column(name = "active")
-	private Boolean active;
+	private Boolean active=true;
 	
 	@Column(name = "subscribe")
-	private Boolean subscribe;
+	private Boolean subscribe=true;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,7 +79,13 @@ public class User implements Serializable{
 	@JoinColumn(name="role_id")
 	private Role role;
 
-	
+	public User(Integer userId) {
+		super();
+		this.userId = userId;
+	}
+	public User() {
+		super();
+	}
 	public String getFirstName() {
 		return firstName;
 	}
