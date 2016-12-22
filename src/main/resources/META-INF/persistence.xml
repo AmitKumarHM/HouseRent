@@ -10,6 +10,7 @@
 		
 		
 		<class>org.rent.model.User</class>
+		<class>org.rent.model.AccessToken</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />

@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.rent.model.Advertisement;
 import org.rent.service.AdvertisementService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class AdvertisementServiceImpl implements AdvertisementService {
 
 	@Override
