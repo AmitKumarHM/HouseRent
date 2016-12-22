@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement	
 @Entity
@@ -46,6 +47,7 @@ public class AccessToken implements Serializable{
 	private Date createdDate;
 
 	/** The user. */
+	@XmlTransient
 	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
 	@JoinColumn(name="user_id")
 	private User user;

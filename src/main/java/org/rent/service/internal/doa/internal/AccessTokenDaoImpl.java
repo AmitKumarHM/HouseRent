@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.rent.model.AccessToken;
+import org.rent.model.User;
 import org.rent.service.internal.doa.AccessTokenDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -64,6 +65,8 @@ public class AccessTokenDaoImpl implements AccessTokenDao{
 		 EntityManager entityManager=entityManagerFactory.createEntityManager();
 		 EntityTransaction transcation=entityManager.getTransaction();
 		 transcation.begin();
+		 User user=entityManager.find(User.class, accessToken.getUser().getUserId());
+		 accessToken.setUser(user);
 		 entityManager.persist(accessToken);
 		 transcation.commit();
 		 Integer id =(Integer)accessToken.getAccessTokenId();

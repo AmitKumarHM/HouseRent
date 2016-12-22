@@ -50,7 +50,7 @@ public class User implements Serializable{
 	private String lastName;
 	
 	@Column(name = "mobile_number")
-	private Integer mobileNumber; 
+	private Long mobileNumber; 
 	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "gender")
@@ -98,10 +98,10 @@ public class User implements Serializable{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Integer getMobileNumber() {
+	public Long getMobileNumber() {
 		return mobileNumber;
 	}
-	public void setMobileNumber(Integer mobileNumber) {
+	public void setMobileNumber(Long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 	public Gender getGender() {
