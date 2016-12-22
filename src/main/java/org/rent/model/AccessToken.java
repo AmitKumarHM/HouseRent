@@ -40,7 +40,7 @@ public class AccessToken implements Serializable{
 	private String refreshToken;
 	
 	@Column(name = "valid_to")
-	private Long validTo;
+	private Long validTo=9000000000l;
 	
 	@Column(name = "created_date")
 	private Date createdDate;

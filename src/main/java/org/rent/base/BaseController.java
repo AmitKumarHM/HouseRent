@@ -41,6 +41,7 @@ public abstract class BaseController {
 		AccessToken accessToken = new AccessToken();
 		accessToken.setCreatedDate(new Timestamp(new Date().getTime()));
 		accessToken.setAccessToken(random);
+		accessToken.setRefreshToken(random);
 		accessToken.setUser(user);		
 		return accessToken;
 		

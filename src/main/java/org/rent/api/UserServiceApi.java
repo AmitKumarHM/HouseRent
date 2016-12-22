@@ -52,7 +52,10 @@ public class UserServiceApi extends BaseController{
 	public AccessToken login(User user) {
 		User persistedUser=userService.getByEmailAndPwd(user);
 		if(persistedUser!=null){
-			return createAccsessToken(persistedUser);
+			AccessToken accessToken=createAccsessToken(persistedUser);
+			Integer id =accessTokenService.save(accessToken);
+			if(id!=null)
+				return accessToken;
 		}
 		return null;
 	}
@@ -78,8 +81,11 @@ public class UserServiceApi extends BaseController{
 	public AccessToken register(User user) {
 		 User persistedUser=services.save(user);
 		 if(persistedUser!=null){
-				return createAccsessToken(persistedUser);
-		}
+				AccessToken accessToken=createAccsessToken(persistedUser);
+				Integer id =accessTokenService.save(accessToken);
+				if(id!=null)
+					return accessToken;
+			}
 		return null;
 	}
 	
