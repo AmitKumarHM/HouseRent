@@ -3,3 +3,4 @@
 .settings/*
 target/*
 nano.save
+/target/

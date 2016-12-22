@@ -41,7 +41,7 @@ public class AccessTokenDaoImpl implements AccessTokenDao{
 
 	@Override
 	public AccessToken findById(Integer id) {
-		Query userList = entityManager.createNamedQuery(AccessToken.GET_ACCESSTOKEN_BY_ID);
+		Query userList = entityManager.createNamedQuery(AccessToken.GET_ACCESSTOKEN_BY_ACCESSTOKEN);
 		userList.setParameter("userId", id);
 		AccessToken persistedAccessToken=(AccessToken)userList.getSingleResult();
 		entityManager.refresh(persistedAccessToken);

@@ -12,14 +12,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement	
 @Entity
 @Table(name = "Access_Token")
+@NamedQueries({@NamedQuery(name=AccessToken.GET_ACCESSTOKEN_BY_ACCESSTOKEN,query="select at from AccessToken at where at.accessToken=:accessToken"),
+    @NamedQuery(name=AccessToken.GET_ACCESSTOKEN_BY_ID_ACCESSTOKEN,query="select at from AccessToken at where at.user.userId=:userId and at.accessToken=:accessToken")})
 public class AccessToken implements Serializable{
 
+	public static final String GET_ACCESSTOKEN_BY_ID_ACCESSTOKEN="AccessToken.getByUserIdAndAccessTOken";
+	public static final String GET_ACCESSTOKEN_BY_ACCESSTOKEN="AccessToken.getByAccessToken";
 	private static final long serialVersionUID = -3703435724533495798L;
 
 	@Column(name = "access_token")

@@ -28,6 +28,7 @@ import org.rent.model.enums.Gender;
 	           @NamedQuery(name=User.GET_USER_BY_ID,query="select u from User u where u.userId=:userId")})
 public class User implements Serializable{
 	private static final long serialVersionUID = -1661527419693036326L;
+	
 	public static final String GET_USERS_LIST = "User.getUserList";
 	public static final String GET_USER_BY_ID = "User.getUserById";
 		

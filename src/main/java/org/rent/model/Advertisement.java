@@ -12,14 +12,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement	
 @Entity
-@Table(name = "Adveristment")
+@Table(name = "Advertisement")
+@NamedQueries({@NamedQuery(name=Advertisement.GET_ADVERTISEMENT_BY_ID,query="select ad from Advertisement ad where ad.advertisementId=:advertisementId")})
 public class Advertisement implements Serializable{
 
+	public static final String GET_ADVERTISEMENT_BY_ID = "Adveristment.getById";
 	private static final long serialVersionUID = 2052714789841969731L;
 	
 	@Id
