@@ -32,10 +32,10 @@ public class Required implements Serializable {
 	private Gender requiredGender;
 	
 	@Column(name = "is_veg")
-	private Boolean isVeg;
+	private Boolean isVeg=true;
 	
 	@Column(name = "is_alcohol")
-	private Boolean isAlcohol;
+	private Boolean isAlcohol=false;
 	
 	@Column(name = "deposite")
 	private Integer deposite;
@@ -43,7 +43,7 @@ public class Required implements Serializable {
 	@Column(name = "rent")
 	private Integer rent;
 	
-	@Column(name = "no_of_member")
+	@Column(name = "no_of_member",length=3)
 	private Short noOfMember;
 
 	@Column(name = "created_date")

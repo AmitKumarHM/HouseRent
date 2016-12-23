@@ -34,7 +34,7 @@ public class UserServiceApi extends BaseController{
 	@GET
 	@Path("/{id}")
 	@Produces({"application/json"})
-	public User getUser(@PathParam("id") int id) {
+	public User getUser(@PathParam("id") Integer id) {
 		return userService.getUser(id);		
 	}
 	
@@ -92,7 +92,7 @@ public class UserServiceApi extends BaseController{
 	@DELETE
 	@Path("/{id}")
 	@Consumes({MediaType.APPLICATION_JSON})
-	public Boolean remove(@HeaderParam("Authorization") String authorization , @HeaderParam("userId") String userId ,@PathParam("id") int id) {
+	public Boolean remove(@HeaderParam("Authorization") String authorization , @HeaderParam("userId") Integer userId ,@PathParam("id") int id) {
 		return services.remove(id,User.class);
      }
 	

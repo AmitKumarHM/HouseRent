@@ -176,6 +176,20 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- **************************Mailing************************************************* -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+		<!-- *******************AWS Java SDK for sending email using Amazon SES library********* -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-ses</artifactId>
+			<version>1.9.39</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

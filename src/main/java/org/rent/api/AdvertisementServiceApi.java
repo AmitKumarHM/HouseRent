@@ -36,9 +36,9 @@ public class AdvertisementServiceApi {
 	}
 	
 	@GET
-	@Path("/{user-id}/all")
+	@Path("/all")
 	@Produces({MediaType.APPLICATION_JSON})
-	public List<Advertisement> getUserlist(@HeaderParam("Authorization") String authorization,@PathParam("user-id") int userId) {
+	public List<Advertisement> getUserlist(@HeaderParam("Authorization") String authorization,@HeaderParam("userId") Integer userId ) {
 		return advertisementService.getByUserId(userId);
 	}
 	

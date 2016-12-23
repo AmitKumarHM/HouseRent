@@ -31,10 +31,10 @@ public class Message implements Serializable {
 	private String text;
 	
 	@Column(name = "created_date")
-	private Date createdDate; 
+	private Date createdDate=new Date(); 
 	
 	@Column(name = "updated_date")
-	private Date updatedDate;
+	private Date updatedDate=new Date();
 
 	/** The user. */
 	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
@@ -46,8 +46,6 @@ public class Message implements Serializable {
 	@JoinColumn(name="to_user")
 	private User toUser;
 
-
-	
 	public User getFromUser() {
 		return fromUser;
 	}

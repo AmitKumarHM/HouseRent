@@ -23,29 +23,29 @@ public class Amenties implements Serializable {
 	@Column(name = "id")
 	private Integer amentiesId;
 
-	@Column(name = "security")
+	@Column(name = "security",length=25)
 	private String security;
 	
-	@Column(name = "school")
+	@Column(name = "school",length=50)
 	private String school;
 	
-	@Column(name = "hospital")
+	@Column(name = "hospital",length=50)
 	private String hospital;
 	
-	@Column(name = "parking")
+	@Column(name = "parking",length=25)
 	private String parking;
 	
-	@Column(name = "petrol_pump")
+	@Column(name = "petrol_pump",length=50)
 	private String petrolPump;
 	
-	@Column(name = "grocery")
+	@Column(name = "grocery",length=50)
 	private String grocery;
 	
 	@Column(name = "created_date")
-	private Date createdDate; 
+	private Date createdDate=new Date(); 
 	
 	@Column(name = "updated_date")
-	private Date updatedDate;
+	private Date updatedDate=new Date();
 
 	public Integer getAmentiesId() {
 		return amentiesId;

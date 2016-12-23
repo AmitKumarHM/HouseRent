@@ -17,7 +17,7 @@ public class Role implements Serializable{
 
 	private static final long serialVersionUID = -5839763253578415487L;
 
-	@Column(name = "role")
+	@Column(name = "role",length=10)
 	private String role;
 	
 	@Id

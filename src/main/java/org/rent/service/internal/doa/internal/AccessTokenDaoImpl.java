@@ -54,6 +54,8 @@ public class AccessTokenDaoImpl implements AccessTokenDao{
 		 EntityManager entityManager=entityManagerFactory.createEntityManager();
 		 EntityTransaction transcation=entityManager.getTransaction();
 		 transcation.begin();
+		 User user=entityManager.find(User.class, accessToken.getUser().getUserId());
+		 accessToken.setUser(user);
 		 AccessToken perAt=entityManager.merge(accessToken);
 		 transcation.commit();
 		 entityManager.close();

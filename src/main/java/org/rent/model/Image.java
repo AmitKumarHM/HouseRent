@@ -30,7 +30,7 @@ public class Image implements Serializable {
 	@Column(name = "image_url")
 	private String imageURL;
 	
-	@Column(name = "image_type")
+	@Column(name = "image_type",length=50)
 	private String imageType;
 	
 	/** The Advertisement. */
@@ -39,10 +39,10 @@ public class Image implements Serializable {
 	private Amenties amenties;
 	
 	@Column(name = "created_date")
-	private Date createdDate; 
+	private Date createdDate=new Date(); 
 	
 	@Column(name = "updated_date")
-	private Date updatedDate;
+	private Date updatedDate=new Date();
 
 	public Integer getImageId() {
 		return imageId;

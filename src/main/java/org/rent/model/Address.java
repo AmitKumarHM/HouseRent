@@ -28,25 +28,25 @@ public class Address implements Serializable {
 	@Column(name = "id")
 	private Integer addressId;
 	
-	@Column(name = "area")
+	@Column(name = "area",length=100)
 	private String area;
 	
-	@Column(name = "landmark")
+	@Column(name = "landmark",length=100)
 	private String landmark;
 	
-	@Column(name = "street")
+	@Column(name = "street",length=100)
 	private String street;
 	
-	@Column(name = "house_number")
+	@Column(name = "house_number",length=100)
 	private String houseNumber;
 	
-	@Column(name = "pincode")
+	@Column(name = "pincode",length=10)
 	private Integer pincode;
 	
-	@Column(name = "lat")
+	@Column(name = "lat",length=10)
 	private Double lat;
 	
-	@Column(name = "lng")
+	@Column(name = "lng",length=10)
 	private Double lng;
 	
 	@Enumerated(EnumType.STRING)

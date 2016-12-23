@@ -31,14 +31,14 @@ public class Advertisement implements Serializable{
 	@Column(name = "id")
 	private Integer advertisementId;
 	
-	@Column(name = "type")
+	@Column(name = "type",length=10)
 	private String type;
 	
 	@Column(name = "created_date")
-	private Date createdDate; 
+	private Date createdDate=new Date(); 
 	
 	@Column(name = "updated_date")
-	private Date updatedDate; 
+	private Date updatedDate=new Date(); 
 	
 	
 	

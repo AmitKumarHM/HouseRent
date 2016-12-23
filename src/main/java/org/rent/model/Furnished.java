@@ -25,10 +25,10 @@ public class Furnished implements Serializable {
 	@Column(name = "id")
 	private Integer furnishedId;
 	
-	@Column(name = "bed")
+	@Column(name = "bed",length=2)
 	private Integer bed;
 	
-	@Column(name = "bathroom")
+	@Column(name = "bathroom",length=2)
 	private Integer bathroom;
 	
 	@Column(name = "is_tv")
@@ -47,10 +47,10 @@ public class Furnished implements Serializable {
 	private Boolean isKitchen;
 	
 	@Column(name = "created_date")
-	private Date createdDate; 
+	private Date createdDate=new Date(); 
 	
 	@Column(name = "updated_date")
-	private Date updatedDate;
+	private Date updatedDate=new Date();
 	
 	
 	public Integer getFurnishedId() {
