@@ -46,4 +46,11 @@ public class UserDaoImpl implements UserDao {
 		query.setParameter("password", user.getPassword());
 		return (User)query.getSingleResult();
 	}
+
+	@Override
+	public User findByEmail(User user) {
+		Query query = entityManager.createNamedQuery(User.GET_USER_BY_EMAIL);
+		query.setParameter("emailId", user.getEmailId());
+		return (User)query.getSingleResult();
+	}
 }

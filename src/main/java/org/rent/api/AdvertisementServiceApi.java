@@ -13,7 +13,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.rent.base.BaseController;
+import org.rent.model.AccessToken;
 import org.rent.model.Advertisement;
+import org.rent.model.User;
 import org.rent.service.AdvertisementService;
 import org.rent.service.Services;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import org.springframework.stereotype.Component;
 
 @Path("/adver")
 @Component
-public class AdvertisementServiceApi {
+public class AdvertisementServiceApi extends BaseController {
 	@Autowired
     private Services<Advertisement>	services;
 	
@@ -41,6 +44,22 @@ public class AdvertisementServiceApi {
 	public List<Advertisement> getUserlist(@HeaderParam("Authorization") String authorization,@HeaderParam("userId") Integer userId ) {
 		return advertisementService.getByUserId(userId);
 	}
+	
+	@GET
+	@Path("/")
+	@Produces({MediaType.APPLICATION_JSON})
+	public List<Advertisement> getlist(@HeaderParam("Authorization") String authorization,@HeaderParam("userId") Integer userId ) {
+		
+		AccessToken accessToken=new AccessToken();
+		accessToken.setAccessToken(getAccsessToken(authorization));
+		accessToken.setUser(new User(userId));
+		accessToken=validateAccessToken(accessToken);
+		if(accessToken!=null){
+			return advertisementService.get();
+		}
+		return null;
+	}
+	
 	
 	@POST
 	@Produces({MediaType.APPLICATION_JSON})

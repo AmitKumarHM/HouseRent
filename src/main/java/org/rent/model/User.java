@@ -27,6 +27,7 @@ import org.rent.model.enums.Gender;
 @Table(name = "User")
 @NamedQueries({@NamedQuery(name=User.GET_USERS_LIST,query="select u from User u"),
 	           @NamedQuery(name=User.GET_USER_BY_ID,query="select u from User u where u.userId=:userId"),
+	           @NamedQuery(name=User.GET_USER_BY_EMAIL,query="select u from User u where u.emailId=:emailId"),
 	           @NamedQuery(name=User.GET_BY_EMAIL_AND_PWD,query="select u from User u where u.emailId=:emailId and u.password=:password")})
 public class User implements Serializable{
 	private static final long serialVersionUID = -1661527419693036326L;
@@ -34,10 +35,15 @@ public class User implements Serializable{
 	public static final String GET_USERS_LIST = "User.getUserList";
 	public static final String GET_USER_BY_ID = "User.getUserById";
 	public static final String GET_BY_EMAIL_AND_PWD = "User.getByEmailAndPwd";
+	public static final String GET_USER_BY_EMAIL = "User.getByEmailId";
 		
 	@XmlTransient
 	@Column(name = "password",length=25)
 	private String password;
+	
+	@XmlTransient
+	@Column(name = "new_password",length=25)
+	private String newPassword;
 	
 	@Column(name = "email_id",unique=true,length=25)
 	private String emailId;
@@ -85,6 +91,25 @@ public class User implements Serializable{
 	}
 	public User() {
 		super();
+	}
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	public String getFirstName() {
 		return firstName;

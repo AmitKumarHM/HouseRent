@@ -60,6 +60,31 @@ public class UserServiceApi extends BaseController{
 		return null;
 	}
 	
+	@POST
+	@Path("/forget")
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_JSON})
+	public Boolean forget(User user) {
+		return userService.getByEmail(user)!=null?true:false;
+	}
+	
+	
+	@POST
+	@Path("/reset")
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_JSON})
+	public Boolean reset(@HeaderParam("Authorization") String authorization, @HeaderParam("userId") Integer userId ,User user) {
+		AccessToken accessToken=new AccessToken();
+		accessToken.setAccessToken(getAccsessToken(authorization));
+		accessToken.setUser(new User(userId));
+		accessToken=validateAccessToken(accessToken);
+		if(accessToken!=null){
+			return services.update(user)!=null?true:false;
+		}
+		return false;
+	}
+	
+	
 	
 	@POST
 	@Produces({MediaType.APPLICATION_JSON})
@@ -69,9 +94,9 @@ public class UserServiceApi extends BaseController{
 		accessToken.setAccessToken(getAccsessToken(authorization));
 		accessToken.setUser(new User(userId));
 		accessToken=validateAccessToken(accessToken);
-		if(accessToken!=null)
-			return true;
-		
+		if(accessToken!=null){
+			return services.update(user)!=null?true:false;
+		}
 		return false;
      }
 	

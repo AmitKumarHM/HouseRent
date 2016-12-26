@@ -11,5 +11,5 @@ List<Advertisement> findByUserId(Integer userId);
 Advertisement findById(Integer id);
 Advertisement update(Advertisement advertisement);
 Integer save(Advertisement advertisement);
-
+List<Advertisement> find();
 }

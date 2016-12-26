@@ -11,5 +11,5 @@ List<Advertisement> getByUserId(Integer userId);
 Advertisement getById(Integer id);
 Boolean update(Advertisement advertisement);
 Integer save(Advertisement advertisement);
-
+List<Advertisement> get();
 }

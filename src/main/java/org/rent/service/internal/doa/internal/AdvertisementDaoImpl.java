@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 import org.rent.model.Advertisement;
 import org.rent.service.internal.doa.AdvertisementDao;
@@ -71,6 +72,13 @@ public class AdvertisementDaoImpl implements AdvertisementDao {
 		 Integer id =(Integer)advertisement.getAdvertisementId();
 		 entityManager.close();
 		 return id;
+	}
+
+	@Override
+	public List<Advertisement> find() {
+		 CriteriaQuery<Advertisement> criteria =entityManager.getCriteriaBuilder().createQuery(Advertisement.class);
+		 criteria.select(criteria.from(Advertisement.class));
+		 return entityManager.createQuery(criteria).getResultList();
 	}
 
 }

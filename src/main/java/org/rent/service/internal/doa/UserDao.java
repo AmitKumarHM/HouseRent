@@ -9,4 +9,5 @@ public interface UserDao {
 List<User> findUserList(); 
 User findUser(int id);
 User findByEmailAndPwd(User user);
+User findByEmail(User user);
 }
