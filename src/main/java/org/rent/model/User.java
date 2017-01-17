@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.rent.model.enums.Gender;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlRootElement	
 @Entity
 @Table(name = "User")
@@ -37,10 +39,12 @@ public class User implements Serializable{
 	public static final String GET_BY_EMAIL_AND_PWD = "User.getByEmailAndPwd";
 	public static final String GET_USER_BY_EMAIL = "User.getByEmailId";
 		
+	@JsonIgnore
 	@XmlTransient
 	@Column(name = "password",length=25)
 	private String password;
 	
+	@JsonIgnore
 	@XmlTransient
 	@Column(name = "new_password",length=25)
 	private String newPassword;

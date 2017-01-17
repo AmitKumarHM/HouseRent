@@ -1,5 +1,8 @@
 package org.rent.utils;
 
+import org.rent.model.User;
+
+
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Region;
@@ -40,7 +43,7 @@ public class Mail {
 	
 	public static final String FROM = "rockstarakgj@gmail.com";  // Replace with your "From" address. This address must be verified.
     public static final String STATIC_TO = "p.nimbalkar39@gmail.com"; // Replace with a "To" address. If your account is still in the
-    public static final String SUBJECT = "Credentails";
+    public static final String SUBJECT = "Home Renting Your Password";
 	public static final String BODY="<div class='header'><h1>Home Renting</h1></div>"
 			+ "<div class='row'> "
 			+ "<div class='col-3 col-m-12 menu'><ul>"
@@ -49,15 +52,15 @@ public class Mail {
 			+ "<li>Pune</li>"
 			+ "<li>Mumbai</li></ul></div>"+
 "<div class='col-6 col-m-9'><h1>The City</h1>"
-+ "<p>You recently requested </p></div>"+
-"<div class='col-3 col-m-12'><div class='aside'><h2>What?</h2><p>Chania is a city on the island of Crete.</p><h2>Where?</h2><p>Crete is a Greek island in the Mediterranean Sea.</p><h2>How?</h2>"+
-"<p>You can reach Chania airport from all over Europe.</p></div></div>"+
-"</div><div class='footer'><p>Resize the browser window to see how the content respond to the resizing.</p></div></body></html>";
++"<p>You recently requested for you password</p></br><h2 class='align:center;'>";
 
-	
-	
-	
-	public static final String HEAD="<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'>"+
+public static final String REM_BODY = "</h2></div>"+
+"<div class='col-3 col-m-12'><div class='aside'><h2>PG Apartments Flats</h2><p>Lot of new Flats and Apartments</p><h2>Bangalore</h2><p>Finish you search</p><h2>Just go to Home Renting</h2>"+
+"<p>Easy and Fast way to search PG Apartment Flats</p></div></div>"+
+"</div><div class='footer'><p>To unsubscrible from Home Renting <a>click here</a></p></div></body></html>";
+
+		
+public static final String HEAD="<!DOCTYPE html><html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'>"+
 "<style> * { box-sizing: border-box; }"+ 
 ".row::after { content: ''; clear: both; display: table; float: right}"+ 
 "[class*='col-'] { float: right; padding: 15px;}"+
@@ -82,10 +85,33 @@ public class Mail {
 	
 	
 	
+public static Boolean mail(User user){
+	    Destination destination = new Destination().withToAddresses(new String[]{user.getEmailId()});
+	    Content subject = new Content().withData(SUBJECT);
+        Content textBody = new Content().withData(HEAD+BODY+user.getPassword()+REM_BODY); 
+        Body body = new Body().withHtml(textBody);
+        Message message = new Message().withSubject(subject).withBody(body);
+        SendEmailRequest request = new SendEmailRequest().withSource(FROM).withDestination(destination).withMessage(message);
+        Boolean status=false;
+        try{        
+            AWSCredentials credentials = new BasicAWSCredentials("AKIAJL6UWNUNC5ETDMUA", "TeWoXmauUAgea4Yn2J6td3qSMnM5GRVGp1Huds2D");
+            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(credentials);
+            Region REGION = Region.getRegion(Regions.US_WEST_2);
+            client.setRegion(REGION);
+            client.sendEmail(request);  
+            System.out.println("Email sent!");
+            status=true;
+        }
+        catch (Exception ex) {
+            System.out.println("The email was not sent.");
+            System.out.println("Error message: " + ex.getMessage());
+        }
+		return status;
+	}
 	
-	public static void main(String...a){
+	public static void main1(String...a){
 		
-		  // Construct an object to contain the recipient address.
+		// Construct an object to contain the recipient address.
         Destination destination = new Destination().withToAddresses(new String[]{"rockstarakgj@gmail.com"});
         
         // Create the subject and body of the message.
@@ -129,13 +155,7 @@ public class Mail {
             System.out.println("The email was not sent.");
             System.out.println("Error message: " + ex.getMessage());
         }
-    
-			
-		
-	//	User user=new User();
-	//	user.setEmailId("aashaykarekar@gmail.com");
-	//	user.setFirstName("Aashay");
-	//	sendForgotPasswordMail(user,null,null,"rockstarakgj@gmail.com","Hello World",new String[]{"Hi","Let me see ouy"},new String[]{"Thanks"},null,null);
+    			
 	}
 	
 }
