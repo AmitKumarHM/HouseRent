@@ -41,8 +41,6 @@ public class Advertisement implements Serializable{
 	private Date updatedDate=new Date(); 
 	
 	
-	
-
 	public Integer getAdvertisementId() {
 		return advertisementId;
 	}

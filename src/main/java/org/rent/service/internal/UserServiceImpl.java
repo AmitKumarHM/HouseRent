@@ -23,7 +23,12 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public User getByEmailAndPwd(User user) {
+		try{
 		return userDao.findByEmailAndPwd(user);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	@Override
 	public User getByEmail(User user) {

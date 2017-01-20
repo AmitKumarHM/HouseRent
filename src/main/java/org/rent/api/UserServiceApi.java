@@ -1,5 +1,6 @@
 package org.rent.api;
 
+import java.io.InputStream;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -20,6 +21,9 @@ import org.rent.service.Services;
 import org.rent.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
  
 @Path("/user")
 @Component
@@ -83,6 +87,23 @@ public class UserServiceApi extends BaseController{
 		}
 		return false;
 	}
+	
+	
+	
+	@POST
+	@Produces({MediaType.APPLICATION_JSON})
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Boolean upload(@FormDataParam("image") InputStream fileInputString,@FormDataParam("image") FormDataContentDisposition fileDetail,@HeaderParam("Authorization") String authorization, @HeaderParam("userId") Integer userId ,User user) {
+		AccessToken accessToken=new AccessToken();
+		accessToken.setAccessToken(getAccsessToken(authorization));
+		accessToken.setUser(new User(userId));
+		accessToken=validateAccessToken(accessToken);
+		if(accessToken!=null){
+			writeToFile(fileInputString,"/"+fileDetail.getFileName(),accessToken.getUser());
+			return services.update(user)!=null?true:false;
+		}
+		return false;
+     }
 	
 	
 	

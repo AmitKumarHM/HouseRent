@@ -2,10 +2,10 @@ package org.rent.model.enums;
 
 public enum State {
 
-	UP ("Uttra Pradesh"),
-    MP ("Madya Pradesh"),
-    Karnataka ("Karnataka");
-
+	UP("Uttra Pradesh"),
+    MP("Madya Pradesh"),
+    Karnataka("Karnataka"),
+	Maharashtra("Maharashtra");
     private final String name;       
 
     private State(String s) {

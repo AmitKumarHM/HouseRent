@@ -11,7 +11,16 @@
 		
 		<class>org.rent.model.User</class>
 		<class>org.rent.model.AccessToken</class>
+		<class>org.rent.model.Address</class>
+		<class>org.rent.model.Advertisement</class>
+		<class>org.rent.model.Amenties</class>
+		<class>org.rent.model.Furnished</class>
+		<class>org.rent.model.Image</class>
+		<class>org.rent.model.Message</class>
+		<class>org.rent.model.Required</class>
+		<class>org.rent.model.Role</class>
 		<properties>
+		
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="show_sql" value="true" />

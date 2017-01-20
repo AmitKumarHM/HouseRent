@@ -64,15 +64,32 @@ public class AdvertisementServiceApi extends BaseController {
 	@POST
 	@Produces({MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_JSON})
-	public Advertisement update(@HeaderParam("Authorization") String authorization ,Advertisement advertisement) {
-		return services.update(advertisement);
+	public Advertisement update(@HeaderParam("Authorization") String authorization ,@HeaderParam("userId") Integer userId ,Advertisement advertisement) {
+		AccessToken accessToken=new AccessToken();
+		accessToken.setAccessToken(getAccsessToken(authorization));
+		accessToken.setUser(new User(userId));
+		accessToken=validateAccessToken(accessToken);
+		if(accessToken!=null){
+			advertisement.setUser(accessToken.getUser());
+			return services.update(advertisement);
+		}
+		return null; 
      }
 	
 	@PUT
 	@Produces({MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_JSON})
-	public Advertisement register(@HeaderParam("Authorization") String authorization ,Advertisement advertisement) {
-		return services.save(advertisement);
+	public Advertisement register(@HeaderParam("Authorization") String authorization, @HeaderParam("userId") Integer userId ,Advertisement advertisement) {
+		
+		AccessToken accessToken=new AccessToken();
+		accessToken.setAccessToken(getAccsessToken(authorization));
+		accessToken.setUser(new User(userId));
+		accessToken=validateAccessToken(accessToken);
+		if(accessToken!=null){
+			advertisement.setUser(accessToken.getUser());
+			return services.save(advertisement);
+		}
+		return null; 
      }
 	
 	@DELETE

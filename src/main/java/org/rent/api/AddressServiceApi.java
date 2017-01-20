@@ -22,6 +22,7 @@ public class AddressServiceApi {
 	@Autowired
     private Services<Address> services;
 	
+	
 	@GET
 	@Path("/{id}")
 	@Produces({MediaType.APPLICATION_JSON})

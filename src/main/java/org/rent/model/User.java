@@ -40,7 +40,6 @@ public class User implements Serializable{
 	public static final String GET_USER_BY_EMAIL = "User.getByEmailId";
 		
 	@JsonIgnore
-	@XmlTransient
 	@Column(name = "password",length=25)
 	private String password;
 	
@@ -64,7 +63,7 @@ public class User implements Serializable{
 	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "gender")
-	private Gender gender;
+	private Gender gender=Gender.MALE;
 	
 	@Column(name = "created_date")
 	private Date createdDate=new Date(); 
@@ -145,12 +144,7 @@ public class User implements Serializable{
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-	public Date getUpdateDate() {
-		return updatedDate;
-	}
-	public void setUpdateDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
+	
 	public Boolean getActive() {
 		return active;
 	}
