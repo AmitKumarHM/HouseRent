@@ -91,16 +91,16 @@ public class UserServiceApi extends BaseController{
 	
 	
 	@POST
+	@Path("/upload")
 	@Produces({MediaType.APPLICATION_JSON})
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Boolean upload(@FormDataParam("image") InputStream fileInputString,@FormDataParam("image") FormDataContentDisposition fileDetail,@HeaderParam("Authorization") String authorization, @HeaderParam("userId") Integer userId ,User user) {
+	public Boolean upload(@FormDataParam("image") InputStream fileInputString,@FormDataParam("image") FormDataContentDisposition fileDetail,@HeaderParam("Authorization") String authorization, @HeaderParam("userId") Integer userId) {
 		AccessToken accessToken=new AccessToken();
 		accessToken.setAccessToken(getAccsessToken(authorization));
 		accessToken.setUser(new User(userId));
 		accessToken=validateAccessToken(accessToken);
 		if(accessToken!=null){
-			writeToFile(fileInputString,"/"+fileDetail.getFileName(),accessToken.getUser());
-			return services.update(user)!=null?true:false;
+			return writeToFile(fileInputString,"/"+fileDetail.getFileName(),accessToken.getUser());
 		}
 		return false;
      }

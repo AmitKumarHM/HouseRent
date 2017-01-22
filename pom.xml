@@ -10,7 +10,7 @@
 		<spring.scope>compile</spring.scope>
 		<slf4j.version>1.6.1</slf4j.version>
 		<hibernate.version>4.1.2</hibernate.version>
-		<jersey.version>1.12</jersey.version>
+		<jersey.version>1.19</jersey.version>
 		<jersey.scope>compile</jersey.scope>
 	</properties>
 	<dependencies>
@@ -151,6 +151,15 @@
 			<version>${jersey.version}</version>
 			<scope>${jersey.scope}</scope>
 		</dependency>
+
+		
+		<dependency>
+		    <groupId>org.jvnet</groupId>
+		    <artifactId>mimepull</artifactId>
+		    <version>1.6</version>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>

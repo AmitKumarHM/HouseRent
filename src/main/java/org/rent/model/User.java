@@ -77,6 +77,10 @@ public class User implements Serializable{
 	@Column(name = "subscribe")
 	private Boolean subscribe=true;
 	
+	
+	@Column(name = "profile_image")
+	private String profileImage;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -96,6 +100,12 @@ public class User implements Serializable{
 		super();
 	}
 	
+	public String getProfileImage() {
+		return profileImage;
+	}
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
 	public String getNewPassword() {
 		return newPassword;
 	}

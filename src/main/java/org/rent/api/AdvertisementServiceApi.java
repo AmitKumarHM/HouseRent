@@ -39,14 +39,14 @@ public class AdvertisementServiceApi extends BaseController {
 	}
 	
 	@GET
-	@Path("/all")
+	@Path("/id")
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<Advertisement> getUserlist(@HeaderParam("Authorization") String authorization,@HeaderParam("userId") Integer userId ) {
 		return advertisementService.getByUserId(userId);
 	}
 	
 	@GET
-	@Path("/")
+	@Path("/all")
 	@Produces({MediaType.APPLICATION_JSON})
 	public List<Advertisement> getlist(@HeaderParam("Authorization") String authorization,@HeaderParam("userId") Integer userId ) {
 		

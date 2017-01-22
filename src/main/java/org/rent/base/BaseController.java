@@ -24,8 +24,11 @@ public abstract class BaseController {
 	private Boolean bucketStatus;
 
 	// save uploaded file to new location
-	public void writeToFile(InputStream uploadedInputStream,
+	public boolean writeToFile(InputStream uploadedInputStream,
 			String uploadedFileLocation,User user) {
+		
+		
+		boolean uploadStatus=false;
 			try {
 				FileOutputStream out = new FileOutputStream(new File(
 						uploadedFileLocation));
@@ -44,12 +47,13 @@ public abstract class BaseController {
 				
 				
 				if(bucketStatus){
-					s3.save(Constants.BUCKET_NAME, bucketImpl.keyName()+"/"+bucketImpl.fileName(uploadedFileLocation), new File(
+					 uploadStatus=s3.save(Constants.BUCKET_NAME, bucketImpl.keyName()+"/"+bucketImpl.fileName(uploadedFileLocation), new File(
 							uploadedFileLocation));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			return uploadStatus;
 	}
 	
 	

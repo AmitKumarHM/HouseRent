@@ -79,7 +79,7 @@ public final class S3Util {
 		try {
 			awsS3 = new AmazonS3Client(
 					new DefaultAWSCredentialsProviderChain());
-			region = Region.getRegion(Regions.US_EAST_1);
+			region = Region.getRegion(Regions.US_WEST_2);
 			awsS3.setRegion(region);
 		} catch (IllegalArgumentException e) {
 			LOG.error("S3 connection error " + e.getMessage());
