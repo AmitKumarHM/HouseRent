@@ -8,48 +8,106 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.rent.bucket.BucketImpl;
 import org.rent.model.AccessToken;
+import org.rent.model.Advertisement;
+import org.rent.model.Image;
 import org.rent.model.User;
 import org.rent.service.AccessTokenService;
 import org.rent.utils.Constants;
-import org.rent.utils.S3Util;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.Upload;
+import com.amazonaws.services.s3.transfer.model.UploadResult;
 
 /**
  * The Class BaseController.
  */
 public abstract class BaseController {	
 
-	private Boolean bucketStatus;
-
+	/** The LOGGER. */
+	private static Log LOGGER = LogFactory.getLog(BaseController.class);
+	
+	
+	public Image writeToFileAdvertisement(InputStream fileInputString, String fileName, Advertisement adver,User user) {
+		
+		Image image=null;
+		try {
+			FileOutputStream out = new FileOutputStream(new File(
+					fileName));
+			int read = 0;
+			byte[] bytes = new byte[1024];
+			while ((read = fileInputString.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
+			out.flush();
+			out.close();
+			BucketImpl bucketImpl=new BucketImpl();
+			TransferManager tm = new TransferManager(new BasicAWSCredentials(Constants.ACCESS_KEY, Constants.SECRET_KEY));        
+		    PutObjectRequest request= new PutObjectRequest(
+		        		Constants.BUCKET_NAME,user.getUserId()+"/"+bucketImpl.keyName()+"/"+fileName, new File(fileName)).withCannedAcl(CannedAccessControlList.PublicRead);
+		    image=new Image();
+		    Upload upload = tm.upload(request);
+		    try {
+		        	UploadResult result=upload.waitForUploadResult();
+		        	LOGGER.info("Upload complete.");
+		        	result.getKey();
+		        	tm.shutdownNow();
+		        	image.setImageURL(Constants.AWS_URL+result.getBucketName()+"/"+result.getKey());
+		        	image.setImageType(fileName.split(".")[1]);
+		    } catch (AmazonClientException amazonClientException) {
+		        	LOGGER.error("Unable to upload file, upload was aborted.");
+		        	amazonClientException.printStackTrace();
+		        } catch (InterruptedException e) {	
+					e.printStackTrace();
+				}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return image;
+	}
+	
+	
+	
 	// save uploaded file to new location
 	public boolean writeToFile(InputStream uploadedInputStream,
 			String uploadedFileLocation,User user) {
-		
-		
+
 		boolean uploadStatus=false;
 			try {
 				FileOutputStream out = new FileOutputStream(new File(
 						uploadedFileLocation));
 				int read = 0;
 				byte[] bytes = new byte[1024];
-
 				while ((read = uploadedInputStream.read(bytes)) != -1) {
 					out.write(bytes, 0, read);
 				}
 				out.flush();
 				out.close();
 				BucketImpl bucketImpl=new BucketImpl();
-				S3Util s3=new S3Util();
-				if(!bucketStatus) 
-				    bucketStatus=s3.createBucket(Constants.BUCKET_NAME);
-				
-				
-				if(bucketStatus){
-					 uploadStatus=s3.save(Constants.BUCKET_NAME, bucketImpl.keyName()+"/"+bucketImpl.fileName(uploadedFileLocation), new File(
-							uploadedFileLocation));
-				}
+				TransferManager tm = new TransferManager(new BasicAWSCredentials(Constants.ACCESS_KEY, Constants.SECRET_KEY));        
+			    PutObjectRequest request= new PutObjectRequest(
+			        		Constants.BUCKET_NAME,user.getUserId()+"/"+bucketImpl.keyName()+"/"+uploadedFileLocation, new File(uploadedFileLocation)).withCannedAcl(CannedAccessControlList.PublicRead);
+			    Upload upload = tm.upload(request);
+			    try {
+			        	UploadResult result=upload.waitForUploadResult();
+			        	LOGGER.info("Upload complete.");
+			        	result.getKey();
+			        	tm.shutdownNow();
+			        	user.setProfileImage(Constants.AWS_URL+result.getBucketName()+"/"+result.getKey());
+			        } catch (AmazonClientException amazonClientException) {
+			        	LOGGER.error("Unable to upload file, upload was aborted.");
+			        	amazonClientException.printStackTrace();
+			        } catch (InterruptedException e) {	
+						e.printStackTrace();
+					}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -93,7 +151,7 @@ public abstract class BaseController {
 	}
 	
 	protected String getAccsessToken(String accessToken) {	
-
+		System.out.println(accessToken);
 		String[] bearerToken=accessToken.split(" ");
 		return bearerToken[1];
 		

@@ -18,9 +18,6 @@ import java.util.TimeZone;
  */
 public final class DateUtil {
 
-	/** The Full qualified class name constant. */
-	private static final String FQCN = DateUtil.class.getName();
-
 	/** The Constant W3CDATETIME_MASKS. */
 	private static final String W3CDATETIME_MASKS = "yyyy-MM-dd'T'HH:mmz";
 

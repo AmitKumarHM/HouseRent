@@ -132,6 +132,7 @@
 			<version>${jersey.version}</version>
 			<scope>${jersey.scope}</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-core</artifactId>
@@ -152,14 +153,19 @@
 			<scope>${jersey.scope}</scope>
 		</dependency>
 
-		
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey.version}</version>
+			<scope>${jersey.scope}</scope>
+		</dependency>
+
+
 		<dependency>
 		    <groupId>org.jvnet</groupId>
 		    <artifactId>mimepull</artifactId>
 		    <version>1.6</version>
 		</dependency>
-
-
 
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>

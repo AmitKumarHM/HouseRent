@@ -20,7 +20,7 @@ public final class Constants {
     ===========================================*/
 	
 	/** The name of the bucket in S3. */
-    public static final String BUCKET_NAME = "rent";
+    public static final String BUCKET_NAME = "rent-api";
 	
     /*-------------------------------------------
     |           File Constants               |
@@ -28,8 +28,19 @@ public final class Constants {
 
 	/** The extension of a file for JSON file. */
     public static final String JSON_EXTENSIION = ".json";
-    
   
+    /*-------------------------------------------
+    |               AWS URL                     |
+    ===========================================*/
+    
+    /** AWS URL. */
+    public static final String AWS_URL = "https://s3-us-west-2.amazonaws.com/";
+    
+    public static final String ACCESS_KEY = "AKIAJL6UWNUNC5ETDMUA";
+    
+    public static final String SECRET_KEY = "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";
+    
+    
     /*-------------------------------------------
     |           Compiler Warning                |
     ===========================================*/

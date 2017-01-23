@@ -12,8 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.ClientConfiguration;
-import com.amazonaws.auth.ClasspathPropertiesFileCredentialsProvider;
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
@@ -61,7 +60,7 @@ public final class S3Util {
 			cc.setConnectionTimeout(300000);
 
 			awsS3 = new AmazonS3Client(
-					new ClasspathPropertiesFileCredentialsProvider(strCredentialFilePath), cc);
+					new BasicAWSCredentials("AKIAJL6UWNUNC5ETDMUA", "TeWoXmauUAgea4Yn2J6td3qSMnM5GRVGp1Huds2D"), cc);
 
 			region = Region.getRegion(rgRegion);
 			awsS3.setRegion(region);
@@ -71,6 +70,26 @@ public final class S3Util {
 
 	}
 
+
+	
+	public S3Util(String strCredentialFilePath, Region region) {
+
+		try {	
+			ClientConfiguration cc = new ClientConfiguration();
+			cc.setMaxErrorRetry(5);
+			cc.setConnectionTimeout(300000);
+
+			awsS3 = new AmazonS3Client(
+					new BasicAWSCredentials("AKIAJL6UWNUNC5ETDMUA", "TeWoXmauUAgea4Yn2J6td3qSMnM5GRVGp1Huds2D"), cc);
+			awsS3.setRegion(region);
+		} catch (IllegalArgumentException e) {
+			LOG.error("S3 connection error " + e.getMessage());
+		}
+
+	}
+	
+	
+	
 	/**
 	 * Instantiates a new S3Util .
 	 */
@@ -78,7 +97,7 @@ public final class S3Util {
 
 		try {
 			awsS3 = new AmazonS3Client(
-					new DefaultAWSCredentialsProviderChain());
+					new BasicAWSCredentials("AKIAJL6UWNUNC5ETDMUA", "TeWoXmauUAgea4Yn2J6td3qSMnM5GRVGp1Huds2D"));
 			region = Region.getRegion(Regions.US_WEST_2);
 			awsS3.setRegion(region);
 		} catch (IllegalArgumentException e) {

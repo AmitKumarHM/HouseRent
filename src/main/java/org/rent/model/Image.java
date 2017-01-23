@@ -35,14 +35,23 @@ public class Image implements Serializable {
 	
 	/** The Advertisement. */
 	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
-	@JoinColumn(name="amenties_id")
-	private Amenties amenties;
+	@JoinColumn(name="advertisement_id")
+	private Advertisement advertisement;
 	
 	@Column(name = "created_date")
 	private Date createdDate=new Date(); 
 	
 	@Column(name = "updated_date")
 	private Date updatedDate=new Date();
+
+
+	public Advertisement getAdvertisement() {
+		return advertisement;
+	}
+
+	public void setAdvertisement(Advertisement advertisement) {
+		this.advertisement = advertisement;
+	}
 
 	public Integer getImageId() {
 		return imageId;
@@ -68,13 +77,6 @@ public class Image implements Serializable {
 		this.imageType = imageType;
 	}
 
-	public Amenties getAmenties() {
-		return amenties;
-	}
-
-	public void setAmenties(Amenties amenties) {
-		this.amenties = amenties;
-	}
 
 	public Date getCreatedDate() {
 		return createdDate;
