@@ -14,11 +14,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.rent.base.BaseController;
 import org.rent.model.AccessToken;
 import org.rent.model.User;
 import org.rent.service.Services;
 import org.rent.service.UserService;
+import org.rent.utils.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +32,10 @@ import com.sun.jersey.multipart.FormDataParam;
 @Component
 public class UserServiceApi extends BaseController{
 
+	/** The LOGGER. */
+	private static Log LOGGER = LogFactory.getLog(UserServiceApi.class);
+	
+	
 	@Autowired
     private UserService	userService;
 	
@@ -68,8 +75,10 @@ public class UserServiceApi extends BaseController{
 	@Path("/forget")
 	@Produces({MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_JSON})
-	public Boolean forget(User user) {
-		return userService.getByEmail(user)!=null?true:false;
+	public User forget(User user) {
+		User persistedUser=userService.getByEmail(user);
+		Mail.mail(persistedUser);
+		return persistedUser;
 	}
 	
 	
@@ -112,6 +121,7 @@ public class UserServiceApi extends BaseController{
 	@Produces({MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_JSON})
 	public Boolean update(@HeaderParam("Authorization") String authorization, @HeaderParam("userId") Integer userId ,User user) {
+		LOGGER.info(user.getEmailId()+" "+user.getFirstName()+" "+user.getLastName()+" "+user.getPassword()+" "+user.getMobileNumber());
 		AccessToken accessToken=new AccessToken();
 		accessToken.setAccessToken(getAccsessToken(authorization));
 		accessToken.setUser(new User(userId));
@@ -126,6 +136,8 @@ public class UserServiceApi extends BaseController{
 	@Produces({MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_JSON})
 	public AccessToken register(User user) {
+		 
+		LOGGER.info(user.getEmailId()+" "+user.getFirstName()+" "+user.getLastName()+" "+user.getPassword()+" "+user.getMobileNumber());
 		 User persistedUser=services.save(user);
 		 if(persistedUser!=null){
 				AccessToken accessToken=createAccsessToken(persistedUser);

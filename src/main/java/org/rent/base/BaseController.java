@@ -151,7 +151,6 @@ public abstract class BaseController {
 	}
 	
 	protected String getAccsessToken(String accessToken) {	
-		System.out.println(accessToken);
 		String[] bearerToken=accessToken.split(" ");
 		return bearerToken[1];
 		

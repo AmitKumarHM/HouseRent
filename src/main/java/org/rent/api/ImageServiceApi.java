@@ -62,7 +62,6 @@ public class ImageServiceApi extends BaseController{
 		if(accessToken!=null){
 			Advertisement adver= advServices.getSingleById(id, Advertisement.class);
 			image=writeToFileAdvertisement(fileInputString,fileDetail.getFileName(),adver,accessToken.getUser());
-			image.setAdvertisement(adver);
 			image=services.save(image);
 		}
 		return image;

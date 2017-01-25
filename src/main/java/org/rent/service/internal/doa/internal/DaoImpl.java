@@ -60,7 +60,7 @@ public class DaoImpl<T> implements Dao<T> {
 		 EntityManager entityManager=entityManagerFactory.createEntityManager();
 		 EntityTransaction transcation=entityManager.getTransaction();
 		 transcation.begin();
-		 entityManager.merge(object);
+		 object=entityManager.merge(object);
 		 transcation.commit();
 		 entityManager.close();
 		 return object;

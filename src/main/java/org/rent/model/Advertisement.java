@@ -2,6 +2,7 @@ package org.rent.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -39,7 +41,6 @@ public class Advertisement implements Serializable{
 	
 	@Column(name = "updated_date")
 	private Date updatedDate=new Date(); 
-	
 	
 	public Integer getAdvertisementId() {
 		return advertisementId;
@@ -113,6 +114,15 @@ public class Advertisement implements Serializable{
 		this.amenties = amenties;
 	}
 
+	public Set<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(Set<Image> images) {
+		this.images = images;
+	}
+
+
 	/** The user. */
 	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
 	@JoinColumn(name="user_id")
@@ -137,5 +147,9 @@ public class Advertisement implements Serializable{
 	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
 	@JoinColumn(name="amenties_id")
 	private Amenties amenties;
+
+	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="advertisement_id")
+	private Set<Image> images; 
 
 }
