@@ -1,0 +1,72 @@
+presentation layer
+servlet/jsp
+spring/mvc
+
+business logic
+EJB
+spring service
+
+persistent layer
+jdbc
+hibeeeernate/jpa
+spring orm
+
+oop
+compoent
+soa(coarse grained)(BB)(macro management)
+aspect
+
+
+monolithic
+single code base
+build time-->high
+
+micro service
+multiple corebase
+docker cp ./sample.war 9149befaff78:bitnami/tomcat
+
+1)config sever------Common loaction of properties file
+   Config Server, Web
+2)config client
+
+
+insert into users (username, password, enabled) values('user3','pass',1);
+insert into users (username, password, enabled) values('user1','pass',1);
+
+insert into roles (username, role) values('user2','admin');
+insert into roles (username, role) values('user2','stduser');
+
+
+C:\Spring Boot\kafka_2.11-1.0.1>/bin/windows/zookeeper-server-start.bat config/zookeeper.properties
+
+/bin/windows/zookeeper-server-start.bat config/zookeeper.properties
+bin\windows\kafka-server-start.bat config\server.properties
+/bin/windows/kafka-server-start.bat config/server1.properties
+
+
+/bin/windows/kafka-topics --list --zookeeper localhost:2181
+\bin\windows\kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topics MyTopic
+/bin/windows/kafka-topics --create --zookeeper localhost:2181 --replication-factor 2 --partitions 2 --topics MyTopic1
+
+
+bin\windows\kafka-console-producer.sh --broker-list localhost:9092 --topic MyTopic
+bin\windows\kafka-console-consumer --bootstrap-server localhost:9092 --topic MyTopic --from-beginning
+bin\windows\kafka-console-consumer --bootstrap-server localhost:9092 --topic MyTopic --from-beginning
+
+docker cp ./sample.war 9149befaff78:bitnami/tomcat/data
+docker commit 9149befaff78
+
+docker pull openjdk:8
+docker login
+docker tag hello-world amitkumarooo7/hello
+docker push amitkumarooo7/hello
+
+docker ps 
+docker images
+docker build . -t restapp
+docker build . -t restapp
+docker run -p 8080 restapp
+docker stop b48a6789bcb1
+static class LoginConfigurer extends WebSecurityConfigurerAdapter{
+	
+}
